@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "1084688936474",
+    "firebase_url": "https://singup-login-realtime-b4ef7-default-rtdb.firebaseio.com",
+    "project_id": "singup-login-realtime-b4ef7",
+    "storage_bucket": "singup-login-realtime-b4ef7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084688936474:android:4120b97c65ff87a305aba3",
+        "android_client_info": {
+          "package_name": "com.example.chatsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCB-wBmod4xvGrC5pX4AwEA9_rFoCnp0JY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084688936474:android:3d5622f889e49d3505aba3",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCB-wBmod4xvGrC5pX4AwEA9_rFoCnp0JY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
