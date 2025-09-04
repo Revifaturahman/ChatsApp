@@ -1,6 +1,9 @@
+import 'package:chatsapp/presentation/provider/chatroom_provider.dart';
 import 'package:chatsapp/widgets/my_teksfield.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:chatsapp/presentation/provider/user_provider.dart';
 
 class Loginpage extends StatelessWidget {
   //email dan pw controller
@@ -11,6 +14,10 @@ class Loginpage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    // final provider = Provider.of<UserProvider>(context, listen: false);
+    // final provider = Provider.of<ChatRoomProvider>(context, listen: false);
+    
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Center(
