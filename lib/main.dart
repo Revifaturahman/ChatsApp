@@ -1,10 +1,14 @@
+import 'package:chatsapp/data/repository/chatparticipant_repository.dart';
 import 'package:chatsapp/data/repository/friends_repository.dart';
 import 'package:chatsapp/data/repository/message_repository.dart';
+import 'package:chatsapp/data/service/chatparticipant_service.dart';
 import 'package:chatsapp/data/service/friends_service.dart';
 import 'package:chatsapp/data/service/message_service.dart';
 import 'package:chatsapp/presentation/pages/chatdetail_page.dart';
 import 'package:chatsapp/presentation/pages/friends_page.dart';
+import 'package:chatsapp/presentation/pages/group_page.dart';
 import 'package:chatsapp/presentation/pages/login.dart';
+import 'package:chatsapp/presentation/provider/chatparticipant_provider.dart';
 import 'package:chatsapp/presentation/provider/friends_provider.dart';
 import 'package:chatsapp/presentation/provider/message_provider.dart';
 import 'package:chatsapp/presentation/themes/lightmode.dart';
@@ -44,6 +48,11 @@ Future<void> main() async {
         ChangeNotifierProvider(
           create: (_) => FriendsProvider(FriendsRepository(FriendsService())),
         ),
+        ChangeNotifierProvider(
+          create: (_) => ChatparticipantProvider(
+            ChatparticipantRepository(ChatparticipantService()),
+          ),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -59,7 +68,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "ChatsApp",
       theme: lightmode,
-      home: FriendsPage(userId: 'u1'),
+      home: GroupPage(roomId: 'r3'),
     );
   }
 }
