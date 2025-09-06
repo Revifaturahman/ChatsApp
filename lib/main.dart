@@ -1,7 +1,11 @@
+import 'package:chatsapp/data/repository/friends_repository.dart';
 import 'package:chatsapp/data/repository/message_repository.dart';
+import 'package:chatsapp/data/service/friends_service.dart';
 import 'package:chatsapp/data/service/message_service.dart';
 import 'package:chatsapp/presentation/pages/chatdetail_page.dart';
+import 'package:chatsapp/presentation/pages/friends_page.dart';
 import 'package:chatsapp/presentation/pages/login.dart';
+import 'package:chatsapp/presentation/provider/friends_provider.dart';
 import 'package:chatsapp/presentation/provider/message_provider.dart';
 import 'package:chatsapp/presentation/themes/lightmode.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +41,9 @@ Future<void> main() async {
         ChangeNotifierProvider(
           create: (_) => MessageProvider(MessageRepository(MessageService())),
         ),
+        ChangeNotifierProvider(
+          create: (_) => FriendsProvider(FriendsRepository(FriendsService())),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -52,7 +59,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "ChatsApp",
       theme: lightmode,
-      home: ChatDetailPage(roomId: 'r1'),
+      home: FriendsPage(userId: 'u1'),
     );
   }
 }
