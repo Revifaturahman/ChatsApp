@@ -1,4 +1,8 @@
+import 'package:chatsapp/data/repository/message_repository.dart';
+import 'package:chatsapp/data/service/message_service.dart';
+import 'package:chatsapp/presentation/pages/chatdetail_page.dart';
 import 'package:chatsapp/presentation/pages/login.dart';
+import 'package:chatsapp/presentation/provider/message_provider.dart';
 import 'package:chatsapp/presentation/themes/lightmode.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart'; // <--- Tambahkan ini
@@ -10,7 +14,6 @@ import 'package:chatsapp/data/repository/chatroom_repository.dart';
 import 'package:chatsapp/data/repository/user_repository.dart';
 import 'package:chatsapp/data/service/chatroom_service.dart';
 import 'package:chatsapp/data/service/user_service.dart';
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized(); // <--- Tambahkan ini
@@ -31,6 +34,9 @@ Future<void> main() async {
               ChatRoomProvider(ChatRoomRepository(ChatRoomService()))
                 ..loadChatRooms(), // otomatis load chatroom
         ),
+        ChangeNotifierProvider(
+          create: (_) => MessageProvider(MessageRepository(MessageService())),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -46,7 +52,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "ChatsApp",
       theme: lightmode,
-      home: Loginpage(),
+      home: ChatDetailPage(roomId: 'r1'),
     );
   }
 }

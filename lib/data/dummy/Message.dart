@@ -1,0 +1,38 @@
+final List<Map<String, dynamic>> dummyMessages = [
+  {
+    "message_id": "m1",
+    "room_id": "r1",
+    "sender_id": "u1",
+    "text": "Halo",
+    "file_url": null,
+    "created_at": "2025-09-04T09:00:00Z",
+    "is_read": true,
+  },
+  {
+    "message_id": "m2",
+    "room_id": "r1",
+    "sender_id": "u2",
+    "text": "Halo juga",
+    "file_url": null,
+    "created_at": "2025-09-04T09:01:00Z",
+    "is_read": true,
+  },
+  {
+    "message_id": "m3",
+    "room_id": "r1",
+    "sender_id": "u1",
+    "text": "Lagi apa bro?",
+    "file_url": null,
+    "created_at": "2025-09-04T09:02:00Z",
+    "is_read": false,
+  },
+  {
+    "message_id": "m4",
+    "room_id": "r1",
+    "sender_id": "u2",
+    "text": null,
+    "file_url": "img.png",
+    "created_at": "2025-09-04T09:03:00Z",
+    "is_read": false,
+  },
+];
