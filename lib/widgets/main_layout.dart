@@ -1,3 +1,4 @@
+import 'package:chatsapp/widgets/bottom_navigation.dart';
 import 'package:flutter/material.dart';
 
 class MainLayout extends StatelessWidget {
@@ -9,17 +10,33 @@ class MainLayout extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "ChatsApp",
+          "AingChat",
           style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
+            color: Color(0xff00BCD4),
+            fontSize: 26,
             fontWeight: FontWeight.w500,
           ),
         ),
-        centerTitle: true,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.white,
+        actions: [
+          IconButton(onPressed: () {}, icon: Icon(Icons.camera_alt_outlined)),
+          PopupMenuButton<String>(
+            onSelected: (value) {
+              if (value == 'settings') {
+                print("setting");
+              } else if (value == 'logout') {
+                print('logout');
+              }
+            },
+            itemBuilder: (context) => [
+              const PopupMenuItem(value: "settings", child: Text("Pengaturan")),
+              const PopupMenuItem(value: "logout", child: Text("Logout")),
+            ],
+          ),
+        ],
       ),
       body: body,
+      bottomNavigationBar: BottomNavigation(),
     );
   }
 }

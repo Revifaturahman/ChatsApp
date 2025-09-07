@@ -7,6 +7,7 @@ import 'package:chatsapp/data/service/message_service.dart';
 import 'package:chatsapp/presentation/pages/chatdetail_page.dart';
 import 'package:chatsapp/presentation/pages/friends_page.dart';
 import 'package:chatsapp/presentation/pages/group_page.dart';
+import 'package:chatsapp/presentation/pages/historychat_page.dart';
 import 'package:chatsapp/presentation/pages/login.dart';
 import 'package:chatsapp/presentation/provider/chatparticipant_provider.dart';
 import 'package:chatsapp/presentation/provider/friends_provider.dart';
@@ -68,7 +69,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "ChatsApp",
       theme: lightmode,
-      home: GroupPage(roomId: 'r3'),
+      home: HistorychatPage(),
     );
   }
 }
