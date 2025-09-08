@@ -8,6 +8,7 @@ import 'package:chatsapp/presentation/pages/chatdetail_page.dart';
 import 'package:chatsapp/presentation/pages/friends_page.dart';
 import 'package:chatsapp/presentation/pages/group_page.dart';
 import 'package:chatsapp/presentation/pages/historychat_page.dart';
+import 'package:chatsapp/presentation/pages/intoductionscreen_page.dart';
 import 'package:chatsapp/presentation/pages/login.dart';
 import 'package:chatsapp/presentation/provider/chatparticipant_provider.dart';
 import 'package:chatsapp/presentation/provider/friends_provider.dart';
@@ -15,6 +16,7 @@ import 'package:chatsapp/presentation/provider/message_provider.dart';
 import 'package:chatsapp/presentation/themes/lightmode.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart'; // <--- Tambahkan ini
+import 'package:introduction_screen/introduction_screen.dart';
 import 'firebase_options.dart'; // <--- Tambahkan ini
 import 'package:provider/provider.dart';
 import 'package:chatsapp/presentation/provider/user_provider.dart';
@@ -69,7 +71,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "ChatsApp",
       theme: lightmode,
-      home: HistorychatPage(),
+      home: IntroductionScreenPage(),
     );
   }
 }
