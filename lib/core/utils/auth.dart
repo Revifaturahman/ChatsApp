@@ -1,4 +1,5 @@
-import 'package:chatsapp/data/models/user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-Future<User?> getUser() async {}
-
+Future<User?> getUser() async {
+  return FirebaseAuth.instance.currentUser;
+}

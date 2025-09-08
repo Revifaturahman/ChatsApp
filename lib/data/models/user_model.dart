@@ -1,28 +1,19 @@
-class User {
+class UserModel {
   final String id;
-  final String accessToken;
   final String name;
-  final int no_phone;
-  final String? avatar;
+  final String email;
 
-  User({
-    required this.id,
-    required this.accessToken,
-    required this.name,
-    required this.no_phone,
-    this.avatar,
-  });
+  UserModel({required this.id, required this.name, required this.email});
 
-  factory User.fromJson(Map<String, dynamic> json) {
-    // final userJson = json['user'];
-    return User(
-      id: json['id'],
-      accessToken: json['accessToken'] ?? '',
-      name: json['name'],
-      no_phone: json['no_phone'] is int
-          ? json['no_phone']
-          : int.tryParse(json['no_phone'].toString()) ?? 0,
-      avatar: json['avatar'],
+  factory UserModel.fromMap(Map<String, dynamic> map, String id) {
+    return UserModel(
+      id: id,
+      name: map['name'] ?? '',
+      email: map['email'] ?? '',
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {"name": name, "email": email};
   }
 }

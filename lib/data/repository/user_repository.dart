@@ -1,81 +1,68 @@
+import 'package:firebase_auth/firebase_auth.dart' as fb;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:chatsapp/data/models/user_model.dart';
-import 'package:chatsapp/data/service/user_service.dart';
 
 class UserRepository {
+  final fb.FirebaseAuth _auth = fb.FirebaseAuth.instance;
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  // sementara pakai dummy
-  final List<Map<String, dynamic>> dummyUsers = [
-    {
-      "id": "1",
-      "accessToken": "token_1",
-      "name": "Revi",
-      "no_phone": 812345001,
-    },
-    {
-      "id": "2",
-      "accessToken": "token_2",
-      "name": "Fatur",
-      "no_phone": 812345002,
-    },
-    {
-      "id": "3",
-      "accessToken": "token_3",
-      "name": "Dina",
-      "no_phone": 812345003,
-    },
-    {
-      "id": "4",
-      "accessToken": "token_4",
-      "name": "Andi",
-      "no_phone": 812345004,
-    },
-    {
-      "id": "5",
-      "accessToken": "token_5",
-      "name": "Siti",
-      "no_phone": 812345005,
-    },
-    {
-      "id": "6",
-      "accessToken": "token_6",
-      "name": "Budi",
-      "no_phone": 812345006,
-    },
-    {
-      "id": "7",
-      "accessToken": "token_7",
-      "name": "Rina",
-      "no_phone": 812345007,
-    },
-    {
-      "id": "8",
-      "accessToken": "token_8",
-      "name": "Agus",
-      "no_phone": 812345008,
-    },
-    {
-      "id": "9",
-      "accessToken": "token_9",
-      "name": "Nina",
-      "no_phone": 812345009,
-    },
-    {
-      "id": "10",
-      "accessToken": "token_10",
-      "name": "Rudi",
-      "no_phone": 812345010,
-    },
-  ];
+  // login email + password
+  Future<fb.User?> login(String email, String password) async {
+    final credential = await _auth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    return credential.user;
+  }
 
-  final UserService service;
+  // register user baru + simpan ke Firestore
+  Future<UserModel?> register(
+    String name,
+    String email,
+    String password,
+  ) async {
+    final credential = await _auth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
 
-  UserRepository(this.service);
+    final fb.User? firebaseUser = credential.user;
 
-  Future<List<User>> getUsers() async {
-    // nanti ganti dengan:
-    // final response = await service.getUsers();
-    // final List data = jsonDecode(response.body);
+    if (firebaseUser != null) {
+      final userModel = UserModel(
+        id: firebaseUser.uid,
+        name: name,
+        email: email,
+      );
 
-    return dummyUsers.map((e) => User.fromJson(e)).toList();
+      await _db
+          .collection("users")
+          .doc(firebaseUser.uid)
+          .set(userModel.toMap());
+      return userModel;
+    }
+    return null;
+  }
+
+  // ambil profile user dari Firestore
+  Future<UserModel?> getUserProfile(String uid) async {
+    final doc = await _db.collection("users").doc(uid).get();
+    if (doc.exists) {
+      return UserModel.fromMap(doc.data()!, doc.id);
+    }
+    return null;
+  }
+
+  // ambil semua user
+  Future<List<UserModel>> getUsers() async {
+    final snapshot = await _db.collection("users").get();
+    return snapshot.docs
+        .map((doc) => UserModel.fromMap(doc.data(), doc.id))
+        .toList();
+  }
+
+  // logout
+  Future<void> logout() async {
+    await _auth.signOut();
   }
 }

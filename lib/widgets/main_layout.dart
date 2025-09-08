@@ -1,15 +1,27 @@
 import 'package:chatsapp/widgets/bottom_navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:chatsapp/presentation/pages/login.dart';
 
 class MainLayout extends StatelessWidget {
   final Widget body;
   const MainLayout({super.key, required this.body});
 
+  Future<void> _logout(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => const LoginPage()),
+      (route) => false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "AingChat",
           style: TextStyle(
             color: Color(0xff00BCD4),
@@ -19,13 +31,16 @@ class MainLayout extends StatelessWidget {
         ),
         backgroundColor: Colors.white,
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.camera_alt_outlined)),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.camera_alt_outlined),
+          ),
           PopupMenuButton<String>(
             onSelected: (value) {
               if (value == 'settings') {
                 print("setting");
               } else if (value == 'logout') {
-                print('logout');
+                _logout(context); // ✅ Panggil fungsi logout
               }
             },
             itemBuilder: (context) => [
@@ -36,7 +51,7 @@ class MainLayout extends StatelessWidget {
         ],
       ),
       body: body,
-      bottomNavigationBar: BottomNavigation(),
+      bottomNavigationBar: const BottomNavigation(),
     );
   }
 }

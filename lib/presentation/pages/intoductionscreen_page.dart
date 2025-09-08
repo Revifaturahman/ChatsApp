@@ -72,7 +72,7 @@ class IntroductionScreenPage extends StatelessWidget {
         onDone: () {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (_) => Loginpage()),
+            MaterialPageRoute(builder: (_) => LoginPage()),
           );
         },
         dotsDecorator: DotsDecorator(
